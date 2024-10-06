@@ -6,6 +6,7 @@ llm_access/api_key_qwen.txt
 llm_access/api_key_openai.txt
 output_img/
 cache/
-exports/
+output_store/ask-graph/*.png
+output_store/data_log/*.csv
 tmp_imgs/*.png
 tmp_imgs/*.html

@@ -1,6 +1,7 @@
 from config.get_config import config_data
 from llm_access import get_api
 
+
 def get_llm():
     model_provider = config_data['llm']['model_provider']
     if model_provider == "qwen":
