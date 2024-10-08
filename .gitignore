@@ -7,6 +7,9 @@ llm_access/api_key_openai.txt
 output_img/
 cache/
 output_store/ask-graph/*.png
+output_store/ask-graph/*.html
+output_store/ask-graph/tmp_imgs/*.png.txt
+output_store/ask-graph/tmp_imgs/*.html.txt
 output_store/data_log/*.csv
 tmp_imgs/*.png
 tmp_imgs/*.html

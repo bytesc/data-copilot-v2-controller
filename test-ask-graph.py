@@ -38,17 +38,34 @@ def send_request(request_data):
         conn.close()
 
 
+def prompt_request(request_data):
+    json_data = json.dumps(request_data)
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    try:
+        conn.request("POST", "/prompt/graph", body=json_data, headers=headers)
+        response = conn.getresponse()
+        return response.status, response.read()
+    except Exception as e:
+        return None, str(e)
+    finally:
+        conn.close()
+
+
 if __name__ == "__main__":
-    for _ in range(2):
+    for _ in range(3):
         request = {
             "question": "查询员工姓名和工资",
             "concurrent": 1,
-            "retries": 3
+            "retries": 5
         }
+        status_code2, response2 = prompt_request(request)
         status_code, response = send_request(request)
-        print(status_code, response)
-        if status_code == 200:
+        print(status_code, status_code2)
+        if status_code == 200 and status_code2 == 200:
             response = json.loads(response)
+            response2 = json.loads(response2)
             filename = re.search(r"/(\w+\.png)", response['file'])[0]
             image_path = 'output_store/ask-graph'+filename
             with open(image_path, 'wb') as image_file:
@@ -58,9 +75,14 @@ if __name__ == "__main__":
 
             write_csv("output_store/data_log/ask_graph.csv",
                       [get_time(), request["question"], request["concurrent"], request["retries"], "/",
-                       response['code'], response['retries_used'], response['file'], response["prompt"], "/",
-                       "qwen1.5-110b-chat"])
+                       response['code'], response['retries_used'], response['file'],
+                        response["success"], "/",
+                       "qwen1.5-110b-chat", "/"])
 
+            write_csv("output_store/ask-graph/" + response['file'] + ".txt",
+                      [get_time(), request["question"], str(request), str(response), str(response2), "/",
+                       "qwen1.5-110b-chat", "/"])
+            print("Success")
         else:
             print("Failed to get image data.")
 
