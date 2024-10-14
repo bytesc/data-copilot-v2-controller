@@ -29,7 +29,7 @@ def send_request(request_data):
         'Content-Type': 'application/json'
     }
     try:
-        conn.request("POST", "/ask/graph", body=json_data, headers=headers)
+        conn.request("POST", "/ask/echart-file", body=json_data, headers=headers)
         response = conn.getresponse()
         return response.status, response.read()
     except Exception as e:
@@ -37,20 +37,6 @@ def send_request(request_data):
     finally:
         conn.close()
 
-
-def prompt_request(request_data):
-    json_data = json.dumps(request_data)
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    try:
-        conn.request("POST", "/prompt/graph", body=json_data, headers=headers)
-        response = conn.getresponse()
-        return response.status, response.read()
-    except Exception as e:
-        return None, str(e)
-    finally:
-        conn.close()
 
 
 if __name__ == "__main__":
@@ -60,28 +46,26 @@ if __name__ == "__main__":
             "concurrent": 1,
             "retries": 5
         }
-        status_code2, response2 = prompt_request(request)
         status_code, response = send_request(request)
-        print(status_code, status_code2)
-        if status_code == 200 and status_code2 == 200:
+        print(status_code)
+        if status_code == 200:
             response = json.loads(response)
-            response2 = json.loads(response2)
-            if response['code']==200:
-                filename = re.search(r"/(\w+\.png)", response['file'])[0]
-                image_path = 'output_store/ask-graph'+filename
-                with open(image_path, 'wb') as image_file:
-                    image_data = base64.b64decode(response['image_data'])
+            if response['code'] == 200:
+                filename = re.search(r"/(\w+\.html)", response['file'])[0]
+                image_path = 'output_store/ask-echart'+filename
+                with open(image_path, 'w') as image_file:
+                    image_data = response['html']
                     image_file.write(image_data)
                 print(f"Image saved to {image_path}")
 
-            write_csv("output_store/data_log/ask_graph.csv",
+            write_csv("output_store/data_log/ask_echart.csv",
                       [get_time(), request["question"], request["concurrent"], request["retries"], "/",
                        response['code'], response['retries_used'], response['file'],
                         response["success"], "/",
                        "qwen1.5-110b-chat", "/"])
 
-            write_csv("output_store/ask-graph/" + response['file'] + ".txt",
-                      [get_time(), request["question"], str(request), str(response), str(response2), "/",
+            write_csv("output_store/ask-echart/" + response['file'] + ".txt",
+                      [get_time(), request["question"], str(request), str(response), "/",
                        "qwen1.5-110b-chat", "/"])
             print("Success")
         else:
