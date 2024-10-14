@@ -1,3 +1,6 @@
+mysql: mysql+pymysql://root:123456@127.0.0.1/world
+# classicmodels data_copilot
+
 llm:
   model_provider: qwen #qwen #openai
   model: qwen1.5-110b-chat
