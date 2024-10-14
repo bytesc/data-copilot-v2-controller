@@ -29,7 +29,7 @@ def send_request(request_data):
         'Content-Type': 'application/json'
     }
     try:
-        conn.request("POST", "/ask/echart-file", body=json_data, headers=headers)
+        conn.request("POST", "/ask/echart-file-2", body=json_data, headers=headers)
         response = conn.getresponse()
         return response.status, response.read()
     except Exception as e:
@@ -42,9 +42,9 @@ def send_request(request_data):
 if __name__ == "__main__":
     for _ in range(3):
         request = {
-            "question": "不同国家寿命比例，只显示排名前5",
-            "concurrent": 1,
-            "retries": 5
+            "question": "计算人均寿命前十的国家人均寿命，画barchart，不同颜色",
+            "concurrent": [1, 1],
+            "retries": [5, 5]
         }
         status_code, response = send_request(request)
         print(status_code)
@@ -59,10 +59,13 @@ if __name__ == "__main__":
                 print(f"Image saved to {image_path}")
 
             write_csv("output_store/data_log/ask_echart.csv",
-                      [get_time(), request["question"], request["concurrent"], request["retries"], "/",
-                       response['code'], response['retries_used'], response['file'],
-                        response["success"], "/",
-                       "qwen1.5-110b-chat", "/"])
+                      [get_time(), request["question"],
+                       request["concurrent"][0], request["concurrent"][1],
+                       request["retries"][0], request["retries"][1], "/",
+                       response['code'],
+                       response['retries_used'][0], response['retries_used'][1],
+                       response["success"][0], response["success"][1], "/",
+                       response['file'], "qwen1.5-110b-chat", "/"])
 
             write_csv("output_store/ask-echart/" + response['file'] + ".txt",
                       [get_time(), request["question"], str(request), str(response), "/",
