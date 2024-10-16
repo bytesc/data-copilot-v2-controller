@@ -56,7 +56,7 @@ def prompt_request(request_data):
 if __name__ == "__main__":
     for _ in range(3):
         request = {
-            "question": "不同国家寿命比例，只显示排名前5",
+            "question": "Which are the top 3 cities with the highest population in each country?",
             "concurrent": 1,
             "retries": 5
         }

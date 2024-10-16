@@ -17,3 +17,4 @@ output_store/ask-echart/tmp_imgs/*.html.txt
 output_store/data_log/*.csv
 tmp_imgs/*.png
 tmp_imgs/*.html
+gened_questions/*.csv

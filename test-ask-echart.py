@@ -42,7 +42,7 @@ def send_request(request_data):
 if __name__ == "__main__":
     for _ in range(3):
         request = {
-            "question": "计算人均寿命前十的国家人均寿命，画barchart，不同颜色",
+            "question": "Which are the top 3 cities with the highest population in each country?",
             "concurrent": [1, 1],
             "retries": [5, 5]
         }
@@ -53,7 +53,7 @@ if __name__ == "__main__":
             if response['code'] == 200:
                 filename = re.search(r"/(\w+\.html)", response['file'])[0]
                 image_path = 'output_store/ask-echart'+filename
-                with open(image_path, 'w') as image_file:
+                with open(image_path, 'w', encoding="utf-8") as image_file:
                     image_data = response['html']
                     image_file.write(image_data)
                 print(f"Image saved to {image_path}")
