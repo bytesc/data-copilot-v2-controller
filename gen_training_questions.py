@@ -7,8 +7,8 @@ pd.set_option('display.max_columns', None)
 
 
 def fetch_data():
-    dict_data = data_access.read_db.get_data_from_db()
-    return dict_data
+    dict_data, key, comments = data_access.read_db.get_data_from_db()
+    return [dict_data, key, comments]
 
 
 def slice_dfs(df_dict, lines=5):
@@ -19,13 +19,15 @@ def slice_dfs(df_dict, lines=5):
 
 
 def gen_questions(bach=5, lang="en"):
+    data = fetch_data()
     if lang == "en":
         prompt = """I am trying to test a A natural language query system for intelligent,
          multi-table database queries, statistical computations, and chart generation.
          you’d better give questions that need multiple values output, such as give me top x or last y.
          try to give question that is suitable to use various types of graphs to illustrate.
          here is the test database structure:\n
-        """ + str(slice_dfs(fetch_data())) + f"please give me {bach} test case questions in english." + \
+        """ + str(slice_dfs(data[0])) + str(data[1]) + str(data[2]) \
+                 + f"please give me {bach} test case questions in english." + \
                  """
          the questions should be split by only a single \\n  
          you should only give me the output with out any additional explanations.
@@ -36,7 +38,7 @@ def gen_questions(bach=5, lang="en"):
         """
     else:
         prompt = ""
-    print(slice_dfs(fetch_data()))
+
     llm = LLM.get_llm()
     ans = call_llm_test.call_llm(prompt, llm)
 

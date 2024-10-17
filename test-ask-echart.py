@@ -38,11 +38,10 @@ def send_request(request_data):
         conn.close()
 
 
-
 if __name__ == "__main__":
     for _ in range(3):
         request = {
-            "question": "Which are the top 3 cities with the highest population in each country?",
+            "question": "List the countries where the official language has more than 50% speakers along with their capital and population.",
             "concurrent": [1, 1],
             "retries": [5, 5]
         }
