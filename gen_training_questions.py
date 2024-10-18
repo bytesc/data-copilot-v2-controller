@@ -1,6 +1,6 @@
 import data_access.read_db
 from llm_access import LLM, call_llm_test
-from utils.write_csv import write_csv
+from utils.write_csv import write_csv_from_list
 import pandas as pd
 
 pd.set_option('display.max_columns', None)
@@ -26,7 +26,7 @@ def gen_questions(bach=5, lang="en"):
          you’d better give questions that need multiple values output, such as give me top x or last y.
          try to give question that is suitable to use various types of graphs to illustrate.
          here is the test database structure:\n
-        """ + str(slice_dfs(data[0])) + str(data[1]) + str(data[2]) \
+        """ + str(slice_dfs(data[0])) + "Here is Key Constraints of the tables:" + str(data[1]) \
                  + f"please give me {bach} test case questions in english." + \
                  """
          the questions should be split by only a single \\n  
@@ -50,11 +50,11 @@ def gen_questions(bach=5, lang="en"):
             return re.sub(r'^\d+\.\s+', '', s).replace("'", "").replace('"', '').strip()
 
         ans_list = [remove_number_dot_space(item) for item in ans_list]
-        write_csv("./gened_questions/test1.csv", ans_list)
+        write_csv_from_list("./gened_questions/training_questions_for_graph_1.csv", ans_list)
         return True
     except Exception as e:
         print(e)
         return False
 
 
-gen_questions()
+gen_questions(bach=10)

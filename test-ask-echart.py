@@ -8,7 +8,7 @@ import logging
 import http.client
 import json
 import base64
-from utils.write_csv import write_csv
+from utils.write_csv import write_csv_from_list
 from utils.get_time import get_time
 
 logging.basicConfig(filename='./ask_ai.log', level=logging.DEBUG,
@@ -57,17 +57,15 @@ if __name__ == "__main__":
                     image_file.write(image_data)
                 print(f"Image saved to {image_path}")
 
-            write_csv("output_store/data_log/ask_echart.csv",
-                      [get_time(), request["question"],
-                       request["concurrent"][0], request["concurrent"][1],
+            write_csv_from_list("output_store/data_log/ask_echart.csv",
+                                [get_time(), request["question"],
                        request["retries"][0], request["retries"][1], "/",
                        response['code'],
                        response['retries_used'][0], response['retries_used'][1],
-                       response["success"][0], response["success"][1], "/",
                        response['file'], "qwen1.5-110b-chat", "/"])
 
-            write_csv("output_store/ask-echart/" + response['file'] + ".txt",
-                      [get_time(), request["question"], str(request), str(response), "/",
+            write_csv_from_list("output_store/ask-echart/" + response['file'] + ".txt",
+                                [get_time(), request["question"], str(request), str(response), "/",
                        "qwen1.5-110b-chat", "/"])
             print("Success")
         else:
