@@ -53,7 +53,7 @@ def prompt_request(request_data):
 
 
 if __name__ == "__main__":
-    question_list = read_csv_to_list("training_questions_for_graph_1.csv")
+    question_list = read_csv_to_list("./gened_questions/training_questions_for_graph_1.csv")
     for question in question_list:
         for _ in range(3):
             request = {
@@ -73,7 +73,7 @@ if __name__ == "__main__":
                         image_file.write(image_data)
                     print(f"Image saved to {image_path}")
 
-                write_csv_from_list("output_store/data_log/ask_graph.csv",
+                write_csv_from_list("output_store/data_log/ask_graph_1.csv",
                                     [get_time(), request["question"],
                                      request["retries"][0], request["retries"][1], "/",
                                      response['code'],
