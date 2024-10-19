@@ -14,9 +14,7 @@ from utils.get_time import get_time
 logging.basicConfig(filename='./ask_ai.log', level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', encoding="utf-8")
 
-
 llm = get_llm()
-
 
 logging.info("setting up")
 
@@ -51,7 +49,7 @@ if __name__ == "__main__":
             response = json.loads(response)
             if response['code'] == 200:
                 filename = re.search(r"/(\w+\.html)", response['file'])[0]
-                image_path = 'output_store/ask-echart'+filename
+                image_path = 'output_store/ask-echart' + filename
                 with open(image_path, 'w', encoding="utf-8") as image_file:
                     image_data = response['html']
                     image_file.write(image_data)
@@ -59,18 +57,15 @@ if __name__ == "__main__":
 
             write_csv_from_list("output_store/data_log/ask_echart.csv",
                                 [get_time(), request["question"],
-                       request["retries"][0], request["retries"][1], "/",
-                       response['code'],
-                       response['retries_used'][0], response['retries_used'][1],
-                       response['file'], "qwen1.5-110b-chat", "/"])
+                                 request["retries"][0], request["retries"][1], "/",
+                                 response['code'],
+                                 response['retries_used'][0], response['retries_used'][1],
+                                 response['file'], "qwen1.5-110b-chat", "/"])
 
-            write_csv_from_list("output_store/ask-echart/" + response['file'] + ".txt",
-                                [get_time(), request["question"], str(request), str(response), "/",
-                       "qwen1.5-110b-chat", "/"])
+            if response['file']:
+                write_csv_from_list("output_store/ask-echart/" + response['file'] + ".txt",
+                                    [get_time(), request["question"], str(request), str(response), "/",
+                                     "qwen1.5-110b-chat", "/"])
             print("Success")
         else:
             print("Failed to get image data.")
-
-
-
-

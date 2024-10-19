@@ -18,7 +18,7 @@ def slice_dfs(df_dict, lines=5):
     return top_five_dict
 
 
-def gen_questions(bach=5, lang="en"):
+def gen_questions(file_name, has_old=False, bach=5, lang="en"):
     data = fetch_data()
     if lang == "en":
         prompt = """I am trying to test a A natural language query system for intelligent,
@@ -36,6 +36,12 @@ def gen_questions(bach=5, lang="en"):
          2. question text
          3. question text
         """
+        if has_old:
+            with open(file_name, "r", encoding="utf-8") as f:
+                prompt = prompt + """
+                These questions are already asked, do not ask same questions again:
+                """ + str(f.readlines())
+
     else:
         prompt = ""
 
@@ -50,11 +56,11 @@ def gen_questions(bach=5, lang="en"):
             return re.sub(r'^\d+\.\s+', '', s).replace("'", "").replace('"', '').strip()
 
         ans_list = [remove_number_dot_space(item) for item in ans_list]
-        write_csv_from_list("./gened_questions/training_questions_for_graph_1.csv", ans_list)
+        write_csv_from_list(file_name, ans_list)
         return True
     except Exception as e:
         print(e)
         return False
 
 
-gen_questions(bach=10)
+gen_questions("./gened_questions/training_questions_for_graph_1.csv", has_old=True, bach=10)

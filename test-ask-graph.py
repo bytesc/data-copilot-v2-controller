@@ -1,4 +1,5 @@
 import re
+import time
 
 from llm_access.LLM import get_llm
 from config.get_config import config_data
@@ -54,8 +55,10 @@ def prompt_request(request_data):
 
 if __name__ == "__main__":
     question_list = read_csv_to_list("./gened_questions/training_questions_for_graph_1.csv")
-    for question in question_list:
+    for question in question_list[:]:
+        time.sleep(3)
         for _ in range(3):
+            time.sleep(3)
             request = {
                 "question": question,
                 "concurrent": [1, 1],
@@ -79,10 +82,10 @@ if __name__ == "__main__":
                                      response['code'],
                                      response['retries_used'][0], response['retries_used'][1],
                                      response['file'], "qwen1.5-110b-chat", "/"])
-
-                write_csv_from_list("output_store/ask-graph/" + response['file'] + ".txt",
-                                    [get_time(), request["question"], str(request), str(response), "/",
-                                     "qwen1.5-110b-chat", "/"])
+                if response['file']:
+                    write_csv_from_list("output_store/ask-graph/" + response['file'] + ".txt",
+                                        [get_time(), request["question"], str(request), str(response), "/",
+                                         "qwen1.5-110b-chat", "/"])
                 print("Success")
             else:
                 print("Failed to get image data.")
