@@ -189,6 +189,11 @@ python main.py
 
 未完待续......
 
+https://github.com/google-research/bert?tab=readme-ov-file
+
+https://huggingface.co/bert-base-uncased/tree/main
+
+https://hf-mirror.com/google-bert/bert-base-multilingual-uncased/tree/main
 
 # 开源许可证
 

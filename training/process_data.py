@@ -1,14 +1,12 @@
 from utils.read_csv import read_csv_to_list_row
 
-output_file_name = "../output_store/data_log/ask_graph_1.csv"
-
 
 def process_output_list(output_file):
     output_list = read_csv_to_list_row(output_file)
     output_list = [[row[1], row[5], row[6], row[7], row[8]] for row in output_list]
-    print(output_list)
+    # print(output_list)
     unique_questions = list(set([row[0] for row in output_list]))
-    print(unique_questions)
+    # print(unique_questions)
     outcome = {}
     for question in unique_questions:
         right = 0
@@ -25,7 +23,9 @@ def process_output_list(output_file):
                 wrong = wrong + 1
         outcome[question] = [retry_list, right/(wrong+right), file]
     print(outcome)
+    return outcome
 
 
 if __name__ == "__main__":
+    output_file_name = "../output_store/data_log/ask_graph_1.csv"
     process_output_list(output_file_name)
