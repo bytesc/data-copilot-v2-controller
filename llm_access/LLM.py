@@ -1,3 +1,5 @@
+import dashscope
+
 from config.get_config import config_data
 from llm_access import get_api
 
@@ -7,6 +9,7 @@ def get_llm():
     if model_provider == "qwen":
         from langchain_community.llms import Tongyi
 
+        dashscope.api_key = get_api.get_api_key_from_file()
         llm = Tongyi(dashscope_api_key=get_api.get_api_key_from_file(),
                      model_name=config_data['llm']['model'])
 
