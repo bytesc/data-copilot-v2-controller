@@ -48,7 +48,7 @@ optimizer = Adam(model.parameters(), lr=1e-5)
 # 训练模型
 model.train()
 threshold = 0.1
-for epoch in range(10):  # 训练10个epoch
+for epoch in range(10000):
     train_loss = 0.0
     correct_predictions_train = 0
     total_samples_train = 0
@@ -76,6 +76,11 @@ for epoch in range(10):  # 训练10个epoch
         correct_predictions_train += (abs_error < threshold).sum().item()
         sum_abs_error_train += abs_error.sum().item()  # 累加绝对误差
 
+    train_accuracy = correct_predictions_train / total_samples_train
+    train_avg_abs_error = sum_abs_error_train / total_samples_train
+    f'Epoch: {epoch}, Train Loss: {train_loss / len(train_dataloader_success_rate)}, '
+    f' Train Accuracy: {train_accuracy}, Train Average Error: {train_avg_abs_error}, '
+
     model.eval()
     correct_predictions_val = 0
     sum_abs_error_val = 0.0  # 累加绝对误差
@@ -100,15 +105,17 @@ for epoch in range(10):  # 训练10个epoch
 
     val_accuracy = correct_predictions_val / total_samples_val
     val_avg_abs_error = sum_abs_error_val / total_samples_val
-    train_accuracy = correct_predictions_train / total_samples_train
-    train_avg_abs_error = sum_abs_error_train / total_samples_train
+
     print(
-        f'Epoch: {epoch}, Train Loss: {train_loss / len(train_dataloader_success_rate)}, '
-        f' Train Accuracy: {train_accuracy}, Train Average Error: {train_avg_abs_error}, '
         f' Validation Accuracy: {val_accuracy}, Validation Average Error: {val_avg_abs_error}')
+
     write_csv_from_list(log_file_name, [epoch, train_loss / len(train_dataloader_success_rate),
                                         train_accuracy, train_avg_abs_error,
-                                        epoch, val_accuracy, val_avg_abs_error])
+                                        val_accuracy, val_avg_abs_error])
+
+    if epoch % 10 == 9:
+        timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        torch.save(model.state_dict(), f'./saves/model_{epoch}_{timestamp}.pth')
 
 # 测试模型
 model.eval()
@@ -141,4 +148,4 @@ with torch.no_grad():
     write_csv_from_list(log_file_name, [test_accuracy, test_accuracy])
 
 timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-torch.save(model.state_dict(), f'./saves/model_{timestamp}.pth')
+torch.save(model.state_dict(), f'./saves/model_final_{timestamp}.pth')
