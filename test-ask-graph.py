@@ -54,7 +54,7 @@ def prompt_request(request_data):
 
 
 if __name__ == "__main__":
-    question_list = read_csv_to_list("./gened_questions/training_questions_for_graph_1.csv")
+    question_list = read_csv_to_list("./gened_questions/training_questions_for_graph_2.csv")
     for question in question_list[:]:
         time.sleep(1)
         for _ in range(3):
