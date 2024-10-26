@@ -5,14 +5,11 @@ from torch import nn
 from torch.optim import Adam
 from transformers import BertTokenizer, BertModel
 
-
 from utils.write_csv import write_csv_from_list
 
 # 初始化BERT模型和分词器
 tokenizer = BertTokenizer.from_pretrained('D:/IDLE/projects/models/bert-base-multilingual-uncased/')
 bert_model = BertModel.from_pretrained('D:/IDLE/projects/models/bert-base-multilingual-uncased/')
-
-
 
 
 class BertRegressionModel(nn.Module):
@@ -81,8 +78,10 @@ def training():
 
         train_accuracy = correct_predictions_train / total_samples_train
         train_avg_abs_error = sum_abs_error_train / total_samples_train
-        f'Epoch: {epoch}, Train Loss: {train_loss / len(train_dataloader_success_rate)}, '
-        f' Train Accuracy: {train_accuracy}, Train Average Error: {train_avg_abs_error}, '
+        print(
+            f'Epoch: {epoch}, Train Loss: {train_loss / len(train_dataloader_success_rate)}, '
+            f' Train Accuracy: {train_accuracy}, Train Average Error: {train_avg_abs_error}, '
+        )
 
         model.eval()
         correct_predictions_val = 0

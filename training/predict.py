@@ -1,11 +1,10 @@
 import torch
 from transformers import BertTokenizer, BertModel
 
+from training.model import BertRegressionModel
 # 加载模型和分词器
 tokenizer = BertTokenizer.from_pretrained(r'D:/IDLE/projects/models/bert-base-multilingual-uncased/')
 bert_model = BertModel.from_pretrained(r'D:/IDLE/projects/models/bert-base-multilingual-uncased/')
-
-from training.model import BertRegressionModel
 
 # 初始化模型
 model = BertRegressionModel()
