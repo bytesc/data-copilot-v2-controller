@@ -21,3 +21,5 @@ gened_questions/*.csv
 
 training/saves/*.pth
 training/train_logs/*.csv
+
+.temp
