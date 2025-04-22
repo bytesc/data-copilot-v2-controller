@@ -17,6 +17,8 @@ output_store/ask-echart/tmp_imgs/*.html.txt
 output_store/data_log/*.csv
 tmp_imgs/*.png
 tmp_imgs/*.html
+tmp_img/*.png
+tmp_img/*.html
 gened_questions/*.csv
 
 training/saves/*.pth
