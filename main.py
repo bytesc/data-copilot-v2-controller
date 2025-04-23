@@ -135,6 +135,7 @@ from pywebio.input import *
 from pywebio.output import *
 from pywebio.session import *
 def main():
+    put_markdown(f"# Data Copilot")
     while 1:
         # Get user input
         question = input("Enter your question", type=TEXT, required=True,
@@ -152,42 +153,37 @@ def main():
         put_markdown(f"**Using threads:**")
         put_markdown(f"## {num_threads}")
 
-        with use_scope('loading_scope'):
-            with put_loading(shape='border', color='primary'):
+        request = {
+            "question": question,
+            "concurrent": [1, 1],
+            "retries": [1, 1]
+        }
 
-                request = {
-                    "question": question,
-                    "concurrent": [1, 1],
-                    "retries": [1, 1]
-                }
+        # Process with threads
+        results = []
+        with concurrent.futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
+            futures = [executor.submit(send_request, request) for _ in range(num_threads)]
 
-                # Process with threads
-                results = []
-                with concurrent.futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
-                    futures = [executor.submit(send_request, request) for _ in range(num_threads)]
+            for future in concurrent.futures.as_completed(futures):
+                try:
+                    res = future.result()
+                    results.append(res)
+                except Exception as e:
+                    put_error(f"Request failed: {e}")
 
-                    for future in concurrent.futures.as_completed(futures):
-                        try:
-                            res = future.result()
-                            results.append(res)
-                        except Exception as e:
-                            put_error(f"Request failed: {e}")
-
-            with use_scope('result_scope'):
-                # Display results
-                if results:
-                    for i, result in enumerate(results, 1):
-                        status_code, json_data = result
-                        data = json.loads(json_data.decode('utf-8'))
-                        if status_code == 200 and data.get('code') == 200:
-                            image_path = parse_and_save_image(result)
-                            put_image(open(image_path, 'rb').read())  # Display the image
-                            put_text(f"Result {i}: Success")
-                        else:
-                            put_text(f"Result {i}: Failed")
+        # Display results
+        if results:
+            for i, result in enumerate(results, 1):
+                status_code, json_data = result
+                data = json.loads(json_data.decode('utf-8'))
+                if status_code == 200 and data.get('code') == 200:
+                    image_path = parse_and_save_image(result)
+                    put_image(open(image_path, 'rb').read())  # Display the image
+                    put_text(f"Result {i}: Success")
                 else:
-                    put_error("All requests failed.")
-
+                    put_text(f"Result {i}: Failed")
+        else:
+            put_error("All requests failed.")
 
 if __name__ == "__main__":
     # main()
