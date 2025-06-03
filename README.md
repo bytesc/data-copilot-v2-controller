@@ -13,7 +13,7 @@
 
 
 ### 本项目相关仓库
-- [RAG 服务端 https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
+- [服务端 https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
 
 
 [个人网站：www.bytesc.top](http://www.bytesc.top) 
@@ -40,6 +40,10 @@
 - 使用数据库的 DataFrame 映射进行操作，避免通过诱导大语言模型进行 sql 注入攻击的风险。
 - 引入词嵌入模型和向量数据库，替代单纯的正则表达式，解决大语言模型的模糊输出，到确定的系统代码执行的映射难题。
 
+## 演示截图
+
+![](./readme_img/img_demo.png)
+![](./readme_img/img_demo2.png)
 
 ## 基本技术原理
 
@@ -95,6 +99,17 @@ pip install -r requirement.txt
 ### 填写配置信息
 
 `./config/config.yaml` 是配置信息文件。
+
+#### 后端
+填写后端服务器的地址和端口
+
+[服务端仓库 https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
+
+```yml
+server:
+  port: 8007
+  host: 127.0.0.1
+```
 
 #### 数据库配置
 连接即可，模型会自动读取数据库结构，无需额外配置

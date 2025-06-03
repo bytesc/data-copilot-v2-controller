@@ -11,7 +11,7 @@ Utilizing natural language queries, this system intelligently parses database st
 - [<u>**Interpretable**</u> Natural Language Database Query System (RAG) based on Large Language Models (LLM) https://github.com/bytesc/data-copilot-steps](https://github.com/bytesc/data-copilot-steps)
 - [Natural Language Database Query System (RAG) based on Large Language Models (LLM) https://github.com/bytesc/data-copilot](https://github.com/bytesc/data-copilot)
 ### Repositories Related to This Project
-- [RAG Server Side https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
+- [Server Side https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
 
 
 [Personal website: www.bytesc.top](http://www.bytesc.top)
@@ -37,6 +37,11 @@ Utilizing natural language queries, this system intelligently parses database st
 - Implement multi-threading for concurrent questioning to enhance response speed and stability.
 - Utilize DataFrame mapping in databases to avoid the risk of SQL injection attacks by manipulating the LLM through induced queries.
 - Introduce word embedding models and vector databases as a replacement for simple regular expressions, in order to address the challenge of mapping fuzzy outputs from LLM to specific system code executions.
+
+## Demo
+
+![](./readme_img/img_demo.png)
+![](./readme_img/img_demo2.png)
 
 ## Basic Technical Principles
 
@@ -94,6 +99,17 @@ pip install -r requirement.txt
 ### Fill in Configuration Information
 
 The configuration file is located at `./config/config.yaml`.
+
+#### Backend
+url and port of backend server
+
+[Server Side Repo https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
+
+```yml
+server:
+  port: 8007
+  host: 127.0.0.1
+```
 
 #### Database Configuration
 
