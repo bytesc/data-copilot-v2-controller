@@ -9,15 +9,16 @@
 
 [📺演示视频 ./demo_video.mp4](./demo_video.mp4) 
 
+### 本项目相关仓库
+本项目包含两个仓库，本仓库为并发预测模型训练和图形界面
+
+以下仓库是智能体（Agent）服务
+
+- [服务端 https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
 
 ### 相关项目
 - [基于大语言模型 (LLM) 的<u>**可解释型**</u>自然语言数据库查询系统 (RAG) https://github.com/bytesc/data-copilot-steps](https://github.com/bytesc/data-copilot-steps)
 - [基于大语言模型 (LLM) 的自然语言数据库查询系统 (RAG) (https://github.com/bytesc/data-copilot](https://github.com/bytesc/data-copilot)
-
-
-### 本项目相关仓库
-- [服务端 https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
-
 
 [个人网站：www.bytesc.top](http://www.bytesc.top) 
 

@@ -8,11 +8,18 @@ Utilizing natural language queries, this system intelligently parses database st
 
 [📺demo_video ./demo_video.mp4](./demo_video.mp4)
 
+### Repositories Related to This Project
+
+This project consists of two repositories. This repository is for concurrent prediction model training and the graphical user interface.
+
+The following repository is for the Agent service:
+
+- [Server Side https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
+
+
 ### Related Projects
 - [<u>**Interpretable**</u> Natural Language Database Query System (RAG) based on Large Language Models (LLM) https://github.com/bytesc/data-copilot-steps](https://github.com/bytesc/data-copilot-steps)
 - [Natural Language Database Query System (RAG) based on Large Language Models (LLM) https://github.com/bytesc/data-copilot](https://github.com/bytesc/data-copilot)
-### Repositories Related to This Project
-- [Server Side https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
 
 
 [Personal website: www.bytesc.top](http://www.bytesc.top)
