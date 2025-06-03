@@ -17,8 +17,8 @@
 - [服务端 https://github.com/bytesc/data-copilot-v2](https://github.com/bytesc/data-copilot-v2)
 
 ### 相关项目
-- [基于大语言模型 (LLM) 的<u>**可解释型**</u>自然语言数据库查询系统 (RAG) https://github.com/bytesc/data-copilot-steps](https://github.com/bytesc/data-copilot-steps)
-- [基于大语言模型 (LLM) 的自然语言数据库查询系统 (RAG) (https://github.com/bytesc/data-copilot](https://github.com/bytesc/data-copilot)
+- [基于大语言模型 (LLM) 的<u>**可解释型**</u>自然语言数据库查询系统 https://github.com/bytesc/data-copilot-steps](https://github.com/bytesc/data-copilot-steps)
+- [基于大语言模型 (LLM) 的自然语言数据库查询系统 (https://github.com/bytesc/data-copilot](https://github.com/bytesc/data-copilot)
 
 [个人网站：www.bytesc.top](http://www.bytesc.top) 
 

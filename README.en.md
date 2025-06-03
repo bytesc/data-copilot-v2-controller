@@ -18,8 +18,8 @@ The following repository is for the Agent service:
 
 
 ### Related Projects
-- [<u>**Interpretable**</u> Natural Language Database Query System (RAG) based on Large Language Models (LLM) https://github.com/bytesc/data-copilot-steps](https://github.com/bytesc/data-copilot-steps)
-- [Natural Language Database Query System (RAG) based on Large Language Models (LLM) https://github.com/bytesc/data-copilot](https://github.com/bytesc/data-copilot)
+- [<u>**Interpretable**</u> Natural Language Database Query System based on Large Language Models (LLM) https://github.com/bytesc/data-copilot-steps](https://github.com/bytesc/data-copilot-steps)
+- [Natural Language Database Query System based on Large Language Models (LLM) https://github.com/bytesc/data-copilot](https://github.com/bytesc/data-copilot)
 
 
 [Personal website: www.bytesc.top](http://www.bytesc.top)
