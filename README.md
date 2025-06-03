@@ -145,13 +145,13 @@ llm:
 
 ### 运行
 
-main.py 是项目入口，运行此文件即可启动服务器
+main.py 是项目入口，运行此文件即可启动服务
 
 ```bash
 python main.py
 ```
 
-
+![](./readme_img/img_demo.png)
 
 ### 未来可能的方向
 
